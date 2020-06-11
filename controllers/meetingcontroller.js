@@ -4,9 +4,7 @@ const Meeting = require("../db").import("../models/meeting");
 // Get meeting
 router.get("/", (req, res) => {
   Meeting.findAll({
-    where: {
-      owner_id: req.user.id,
-    },
+    where: {},
   })
     .then((meetings) =>
       res.status(200).json({
