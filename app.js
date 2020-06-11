@@ -6,7 +6,9 @@ const meeting = require("./controllers/meetingcontroller");
 const user = require("./controllers/usercontroller");
 
 const sequelize = require("./db");
-sequelize.sync();
+sequelize.sync({
+  force: true,
+});
 
 app.use(express.json());
 app.use(require("./middleware/headers"));
