@@ -18,7 +18,7 @@ const validateSession = (req, res, next) => {
           console.log(decoded)
         )
           .then((user) => {
-            if (!user) throw "err";
+            if (!user) console.log(err);
             req.user = user;
 
             next();
