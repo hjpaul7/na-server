@@ -9,24 +9,19 @@ router.post("/register", (req, res) => {
   User.create({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 10),
-  })
-    .then(
-      (createSuccess = (user) => {
-        let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-          expiresIn: 60 * 60 * 24,
-        });
-        res.json({
-          user: user,
-          message: "user created",
-          sessionToken: token,
-        });
-      })((createError = (err) => res.send(500, err)))
-    )
-    .catch((err) =>
-      res.status(500).json({
-        error: err,
-      })
-    );
+  }).then(
+    (createSuccess = (user) => {
+      let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 24,
+      });
+      res.json({
+        user: user,
+        message: "user created",
+        sessionToken: token,
+      });
+    }),
+    (createError = (err) => res.send(500, err))
+  );
 });
 
 // Login
